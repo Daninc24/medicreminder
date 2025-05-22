@@ -210,4 +210,36 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 1. Telemedicine integration
 2. Multi-language support
 3. Advanced reporting
-4. Integration with external healthcare systems 
+4. Integration with external healthcare systems
+
+## Deployment
+
+### Docker
+
+To deploy the system using Docker:
+
+1. **Build the Docker images**:
+```bash
+docker-compose build
+```
+
+2. **Start all services**:
+```bash
+docker-compose up -d
+```
+
+This will start the backend, frontend, and MongoDB services.
+
+### Accessing the Application
+
+- **Frontend**: http://localhost
+- **Backend API**: http://localhost:5000
+
+For production deployment, you should:
+1. Use proper domain names
+2. Set up SSL/TLS certificates
+3. Configure proper security measures
+4. Set up monitoring and logging
+5. Implement backup strategies
+
+Would you like me to explain any part of the deployment configuration in more detail or help you with a specific aspect of the deployment? 
