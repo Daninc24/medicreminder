@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=your_secure_password
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb://admin:your_secure_password@mongodb:27017/medical_reminder?authSource=admin
+      - JWT_SECRET=your_jwt_secret
+      - SMTP_HOST=your_smtp_host
+      - SMTP_PORT=your_smtp_port
+      - SMTP_USER=your_smtp_user
+      - SMTP_PASS=your_smtp_password
+      - TWILIO_ACCOUNT_SID=your_twilio_sid
+      - TWILIO_AUTH_TOKEN=your_twilio_token
+      - VAPID_PUBLIC_KEY=your_vapid_public_key
+      - VAPID_PRIVATE_KEY=your_vapid_private_key
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+
+volumes:
+  mongodb_data: 
